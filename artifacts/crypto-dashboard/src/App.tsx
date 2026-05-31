@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { TopNav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
+import { PriceTicker } from "@/components/layout/ticker";
 
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
@@ -26,6 +27,7 @@ function Router() {
     <div className="min-h-screen flex flex-col relative">
       <div className="scanner-line" />
       <TopNav />
+      <PriceTicker />
       <main className="flex-1 overflow-x-hidden pt-4">
         <Switch>
           <Route path="/" component={Home} />

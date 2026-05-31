@@ -175,6 +175,22 @@
   @apply bg-card/40 backdrop-blur-xl border border-white/5 shadow-lg;
 }
 
+/* Price ticker marquee */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 60s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
 /* Sci-fi scanner line animation */
 @keyframes scan {
   0% { transform: translateY(-100%); opacity: 0; }
