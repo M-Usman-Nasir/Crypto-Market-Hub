@@ -1,22 +1,22 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Crypto Dashboard API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: market
+    description: Crypto market data
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +24,82 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /coins:
+    get:
+      operationId: listCoins
+      tags: [market]
+      summary: List top coins with market data
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: currency
+          in: query
+          schema:
+            type: string
+            default: usd
+      responses:
+        "200":
+          description: List of coins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Coin"
+
+  /coins/{id}:
+    get:
+      operationId: getCoin
+      tags: [market]
+      summary: Get single coin details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Coin detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoinDetail"
+        "404":
+          description: Not found
+
+  /market-overview:
+    get:
+      operationId: getMarketOverview
+      tags: [market]
+      summary: Global crypto market stats
+      responses:
+        "200":
+          description: Market overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketOverview"
+
+  /trending:
+    get:
+      operationId: getTrending
+      tags: [market]
+      summary: Trending coins
+      responses:
+        "200":
+          description: Trending coins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrendingCoin"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +110,155 @@ components:
       required:
         - status
 
+    Coin:
+      type: object
+      required:
+        - id
+        - symbol
+        - name
+        - current_price
+        - market_cap
+        - market_cap_rank
+        - total_volume
+        - price_change_percentage_24h
+        - image
+      properties:
+        id:
+          type: string
+        symbol:
+          type: string
+        name:
+          type: string
+        image:
+          type: string
+        current_price:
+          type: number
+        market_cap:
+          type: number
+        market_cap_rank:
+          type: integer
+        total_volume:
+          type: number
+        price_change_percentage_24h:
+          type: ["number", "null"]
+        price_change_percentage_7d:
+          type: ["number", "null"]
+        sparkline_in_7d:
+          type: object
+          properties:
+            price:
+              type: array
+              items:
+                type: number
+          nullable: true
+        circulating_supply:
+          type: ["number", "null"]
+        ath:
+          type: ["number", "null"]
+
+    CoinDetail:
+      type: object
+      required:
+        - id
+        - symbol
+        - name
+        - image
+        - current_price
+        - market_cap
+        - market_cap_rank
+        - total_volume
+        - price_change_percentage_24h
+      properties:
+        id:
+          type: string
+        symbol:
+          type: string
+        name:
+          type: string
+        image:
+          type: string
+        description:
+          type: ["string", "null"]
+        current_price:
+          type: number
+        market_cap:
+          type: number
+        market_cap_rank:
+          type: integer
+        total_volume:
+          type: number
+        price_change_percentage_24h:
+          type: ["number", "null"]
+        price_change_percentage_7d:
+          type: ["number", "null"]
+        price_change_percentage_30d:
+          type: ["number", "null"]
+        ath:
+          type: ["number", "null"]
+        atl:
+          type: ["number", "null"]
+        circulating_supply:
+          type: ["number", "null"]
+        total_supply:
+          type: ["number", "null"]
+        sparkline_in_7d:
+          type: object
+          properties:
+            price:
+              type: array
+              items:
+                type: number
+          nullable: true
+        homepage:
+          type: ["string", "null"]
+
+    MarketOverview:
+      type: object
+      required:
+        - total_market_cap_usd
+        - total_volume_usd
+        - btc_dominance
+        - eth_dominance
+        - market_cap_change_percentage_24h
+        - active_cryptocurrencies
+        - markets
+      properties:
+        total_market_cap_usd:
+          type: number
+        total_volume_usd:
+          type: number
+        btc_dominance:
+          type: number
+        eth_dominance:
+          type: number
+        market_cap_change_percentage_24h:
+          type: number
+        active_cryptocurrencies:
+          type: integer
+        markets:
+          type: integer
+
+    TrendingCoin:
+      type: object
+      required:
+        - id
+        - name
+        - symbol
+        - market_cap_rank
+        - thumb
+        - score
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        market_cap_rank:
+          type: ["integer", "null"]
+        thumb:
+          type: string
+        score:
+          type: integer
+        price_btc:
+          type: ["number", "null"]
