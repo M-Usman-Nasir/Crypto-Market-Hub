@@ -31,7 +31,7 @@ export default function CoinDetail() {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
         <div className="font-mono text-xl text-destructive mb-4">ERROR: ASSET_NOT_FOUND</div>
-        <Link href="/" className="text-primary hover:underline font-mono inline-flex items-center gap-2">
+        <Link href="/dashboard" className="text-primary hover:underline font-mono inline-flex items-center gap-2">
           <CornerUpLeft className="w-4 h-4" /> RETURN_TO_TERMINAL
         </Link>
       </div>
@@ -44,7 +44,7 @@ export default function CoinDetail() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-8 animate-in slide-in-from-bottom-4 duration-500">
       
-      <Link href="/">
+      <Link href="/dashboard">
         <div className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors cursor-pointer bg-white/5 px-3 py-1.5 rounded-md border border-white/10 hover:border-primary/50">
           <CornerUpLeft className="w-3 h-3" />
           BACK_TO_TERMINAL

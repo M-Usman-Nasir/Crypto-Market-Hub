@@ -3,8 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { TopNav } from "@/components/layout/nav";
+import { Footer } from "@/components/layout/footer";
 
-// Pages
+import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
 import CoinDetail from "@/pages/coin-detail";
 import About from "@/pages/about";
@@ -14,7 +15,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      staleTime: 1000 * 60 * 5,
       retry: 1,
     },
   },
@@ -25,14 +26,16 @@ function Router() {
     <div className="min-h-screen flex flex-col relative">
       <div className="scanner-line" />
       <TopNav />
-      <main className="flex-1 overflow-x-hidden pt-4 pb-12">
+      <main className="flex-1 overflow-x-hidden pt-4">
         <Switch>
-          <Route path="/" component={Dashboard} />
+          <Route path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/coin/:id" component={CoinDetail} />
           <Route path="/about" component={About} />
           <Route component={NotFound} />
         </Switch>
       </main>
+      <Footer />
     </div>
   );
 }
