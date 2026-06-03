@@ -4,9 +4,10 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Deploy (Vercel)
 
-- Connect the GitHub repo with **Root Directory** = repository root (`.`).
+- **Root Directory must be `.` (repo root), not `artifacts/api-server` or `artifacts/crypto-dashboard`.**
+- If the dashboard override says `pnpm run build:vercel`, that script exists on the root `package.json` and in workspace packages via `pnpm -w`.
 - `vercel.json` builds the dashboard and serves the Express API via `api/index.ts`.
-- Optional env: `LOG_LEVEL=info`. `PORT` / `BASE_PATH` are set during build by `build:vercel`.
+- Optional env: `LOG_LEVEL=info`.
 
 ## Run & Operate
 
