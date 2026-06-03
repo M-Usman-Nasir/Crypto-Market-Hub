@@ -4,10 +4,13 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Deploy (Vercel)
 
-- **Root Directory must be `.` (repo root), not `artifacts/api-server` or `artifacts/crypto-dashboard`.**
-- If the dashboard override says `pnpm run build:vercel`, that script exists on the root `package.json` and in workspace packages via `pnpm -w`.
-- `vercel.json` builds the dashboard and serves the Express API via `api/index.ts`.
-- Optional env: `LOG_LEVEL=info`.
+**Option A — one project (repo root `.`):** `vercel.json` serves UI + `/api` via `api/index.ts`.
+
+**Option B — two projects (current setup):**
+- API: Root Directory `artifacts/api-server`, uses `artifacts/api-server/vercel.json`.
+- UI: Root Directory `.` (repo root). Set env **`VITE_API_BASE_URL`** = `https://your-api-project.vercel.app` (no trailing slash).
+
+Optional API env: `LOG_LEVEL=info`, `NODE_ENV=production`.
 
 ## Run & Operate
 
