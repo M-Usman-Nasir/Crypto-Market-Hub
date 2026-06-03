@@ -1,13 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm exec tsc --build --force && pnpm --filter @workspace/api-server run typecheck && pnpm --filter @workspace/crypto-dashboard run build",
+  "buildCommand": "pnpm exec tsc --build --force && pnpm --filter @workspace/api-server run typecheck && pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/crypto-dashboard run build",
   "outputDirectory": "artifacts/crypto-dashboard/dist/public",
   "framework": null,
   "functions": {
     "api/index.ts": {
       "memory": 1024,
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "artifacts/api-server/dist/**"
     }
   },
   "rewrites": [
