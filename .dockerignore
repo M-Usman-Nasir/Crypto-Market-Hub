@@ -1,0 +1,11 @@
+node_modules
+**/node_modules
+**/dist
+public
+.git
+.cache
+.local
+.vscode
+.cursor
+coverage
+*.tsbuildinfo

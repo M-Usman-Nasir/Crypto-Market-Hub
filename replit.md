@@ -2,15 +2,16 @@
 
 _Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
 
-## Deploy (Vercel)
+## Deploy
 
-**Option A — one project (repo root `.`):** `vercel.json` serves UI + `/api` via `api/index.ts`.
+**Recommended (free fullstack, one URL):** Fly.io or Koyeb using root `Dockerfile` — see [docs/DEPLOY.md](docs/DEPLOY.md).
 
-**Option B — two projects (current setup):**
-- API: Root Directory `artifacts/api-server`, build `node ./build.mjs` (do not use root `pnpm build` — it builds the whole monorepo).
-- UI: Root Directory `.` (repo root). Set env **`VITE_API_BASE_URL`** = `https://your-api-project.vercel.app` (no trailing slash).
+```bash
+pnpm run build:deploy
+pnpm run start:deploy   # needs PORT=8080 (or host-provided PORT)
+```
 
-Optional API env: `LOG_LEVEL=info`, `NODE_ENV=production`.
+**Vercel (optional):** `vercel.json` or two projects with `VITE_API_BASE_URL` for split API/UI.
 
 ## Run & Operate
 
