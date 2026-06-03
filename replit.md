@@ -2,6 +2,12 @@
 
 _Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
 
+## Deploy (Vercel)
+
+- Connect the GitHub repo with **Root Directory** = repository root (`.`).
+- `vercel.json` builds the dashboard and serves the Express API via `api/index.ts`.
+- Optional env: `LOG_LEVEL=info`. `PORT` / `BASE_PATH` are set during build by `build:vercel`.
+
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)

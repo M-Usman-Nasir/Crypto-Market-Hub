@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["index.ts"],
+  "references": [
+    { "path": "../artifacts/api-server" },
+    { "path": "../lib/api-zod" }
+  ]
+}
