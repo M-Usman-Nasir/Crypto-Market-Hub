@@ -30,9 +30,9 @@ export default function CoinDetail() {
   if (!coin) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <div className="font-mono text-xl text-destructive mb-4">ERROR: ASSET_NOT_FOUND</div>
+        <div className="font-mono text-xl text-destructive mb-4">Error: asset not found</div>
         <Link href="/dashboard" className="text-primary hover:underline font-mono inline-flex items-center gap-2">
-          <CornerUpLeft className="w-4 h-4" /> RETURN_TO_TERMINAL
+          <CornerUpLeft className="w-4 h-4" /> Return to terminal
         </Link>
       </div>
     );
@@ -47,7 +47,7 @@ export default function CoinDetail() {
       <Link href="/dashboard">
         <div className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors cursor-pointer bg-white/5 px-3 py-1.5 rounded-md border border-white/10 hover:border-primary/50">
           <CornerUpLeft className="w-3 h-3" />
-          BACK_TO_TERMINAL
+          Back to terminal
         </div>
       </Link>
 
@@ -73,7 +73,7 @@ export default function CoinDetail() {
               <div className="flex gap-4 mt-4">
                 {coin.homepage && (
                   <a href={coin.homepage} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-primary transition-colors">
-                    <Globe className="w-3.5 h-3.5" /> WEBSITE
+                    <Globe className="w-3.5 h-3.5" /> Website
                   </a>
                 )}
               </div>
@@ -81,7 +81,7 @@ export default function CoinDetail() {
           </div>
 
           <div className="text-left lg:text-right">
-            <div className="text-sm font-mono text-muted-foreground mb-1">CURRENT_PRICE</div>
+            <div className="text-sm font-mono text-muted-foreground mb-1">Current price</div>
             <div className="text-5xl font-bold text-white tracking-tighter mb-2 font-mono drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]">
               {formatCurrency(coin.current_price, coin.current_price < 1 ? 4 : 2)}
             </div>
@@ -106,7 +106,7 @@ export default function CoinDetail() {
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="font-mono text-sm font-semibold tracking-widest text-primary flex items-center gap-2">
                 <ActivityIcon className="w-4 h-4" />
-                7D_PRICE_TRAJECTORY
+                7d price trajectory
               </h2>
               <div className={cn(
                 "font-mono text-xs px-2 py-1 rounded",
@@ -129,7 +129,7 @@ export default function CoinDetail() {
             <div className="glass-panel p-6 rounded-xl">
               <h2 className="font-mono text-sm font-semibold tracking-widest text-primary mb-4 flex items-center gap-2">
                 <Info className="w-4 h-4" />
-                ASSET_INTELLIGENCE
+                Asset intelligence
               </h2>
               <div 
                 className="prose prose-invert max-w-none prose-p:text-sm prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline font-sans text-muted-foreground"
@@ -144,22 +144,22 @@ export default function CoinDetail() {
           <div className="glass-panel p-6 rounded-xl">
             <h3 className="font-mono text-sm font-semibold tracking-widest text-primary mb-6 flex items-center gap-2">
               <Cpu className="w-4 h-4" />
-              MARKET_METRICS
+              Market metrics
             </h3>
             
             <div className="space-y-5">
               <div className="bg-black/20 p-4 rounded-lg border border-white/5">
-                <div className="text-[11px] font-mono text-muted-foreground mb-1">MARKET_CAP</div>
+                <div className="text-[11px] font-mono text-muted-foreground mb-1">Market cap</div>
                 <div className="text-lg font-mono text-white font-medium">{formatCurrency(coin.market_cap)}</div>
               </div>
 
               <div className="bg-black/20 p-4 rounded-lg border border-white/5">
-                <div className="text-[11px] font-mono text-muted-foreground mb-1">24H_VOLUME</div>
+                <div className="text-[11px] font-mono text-muted-foreground mb-1">24h volume</div>
                 <div className="text-lg font-mono text-white font-medium">{formatCurrency(coin.total_volume)}</div>
               </div>
 
               <div className="bg-black/20 p-4 rounded-lg border border-white/5">
-                <div className="text-[11px] font-mono text-muted-foreground mb-1">ALL_TIME_HIGH</div>
+                <div className="text-[11px] font-mono text-muted-foreground mb-1">All time high</div>
                 <div className="text-lg font-mono text-white font-medium">{formatCurrency(coin.ath)}</div>
                 {coin.ath && (
                   <div className="text-xs font-mono text-destructive mt-1 flex items-center gap-1">
@@ -175,7 +175,7 @@ export default function CoinDetail() {
                   <div className="text-sm font-mono text-white">{formatCompactNumber(coin.circulating_supply)}</div>
                 </div>
                 <div className="bg-black/20 p-3 rounded-lg border border-white/5">
-                  <div className="text-[10px] font-mono text-muted-foreground mb-1">TOTAL_SUPPLY</div>
+                  <div className="text-[10px] font-mono text-muted-foreground mb-1">Total supply</div>
                   <div className="text-sm font-mono text-white">{coin.total_supply ? formatCompactNumber(coin.total_supply) : '∞'}</div>
                 </div>
               </div>

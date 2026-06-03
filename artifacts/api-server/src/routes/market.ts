@@ -3,6 +3,11 @@ import {
   ListCoinsQueryParams,
   GetCoinParams,
 } from "@workspace/api-zod";
+import type {
+  CoinGeckoCoinDetail,
+  CoinGeckoGlobalResponse,
+  CoinGeckoTrendingResponse,
+} from "../types/coingecko";
 
 const router = Router();
 
@@ -25,14 +30,14 @@ function setCache(key: string, data: unknown, ttlMs: number) {
   cache.set(key, { data, expiresAt: Date.now() + ttlMs });
 }
 
-async function cgFetch(url: string) {
+async function cgFetch<T>(url: string): Promise<T> {
   const res = await fetch(url, {
     headers: { Accept: "application/json" },
   });
   if (!res.ok) {
     throw new Error(`CoinGecko error: ${res.status}`);
   }
-  return res.json();
+  return res.json() as Promise<T>;
 }
 
 // GET /api/coins — cache 60 seconds
@@ -76,7 +81,7 @@ router.get("/coins/:id", async (req, res) => {
   }
 
   try {
-    const data = await cgFetch(
+    const data = await cgFetch<CoinGeckoCoinDetail>(
       `${COINGECKO_BASE}/coins/${parsed.data.id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`
     );
 
@@ -120,7 +125,7 @@ router.get("/market-overview", async (req, res) => {
   }
 
   try {
-    const data = await cgFetch(`${COINGECKO_BASE}/global`);
+    const data = await cgFetch<CoinGeckoGlobalResponse>(`${COINGECKO_BASE}/global`);
     const d = data.data ?? {};
 
     const overview = {
@@ -151,8 +156,10 @@ router.get("/trending", async (req, res) => {
   }
 
   try {
-    const data = await cgFetch(`${COINGECKO_BASE}/search/trending`);
-    const coins = (data.coins ?? []).slice(0, 10).map((item: any) => ({
+    const data = await cgFetch<CoinGeckoTrendingResponse>(
+      `${COINGECKO_BASE}/search/trending`,
+    );
+    const coins = (data.coins ?? []).slice(0, 10).map((item) => ({
       id: item.item.id,
       name: item.item.name,
       symbol: item.item.symbol,

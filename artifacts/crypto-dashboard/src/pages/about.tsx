@@ -10,7 +10,7 @@ export default function About() {
           NEXUS<span className="text-primary">.CORE</span>
         </h1>
         <p className="font-mono text-sm text-primary tracking-widest uppercase">
-          Next-Generation Market Intelligence
+          Next generation market intelligence
         </p>
       </div>
 
@@ -22,7 +22,7 @@ export default function About() {
             NEXUS.CORE is a high-performance crypto market terminal designed for professionals who demand unfiltered, real-time data in an environment built for focus.
           </p>
           <p>
-            Traditional exchanges bury critical metrics under layers of marketing and unnecessary UI. NEXUS strips away the noise, presenting the market exactly as it is—raw, fast, and uncompromising. Built on advanced Web3 data streams, our terminal provides unparalleled visibility into global asset movements.
+            Traditional exchanges bury critical metrics under layers of marketing and unnecessary UI. NEXUS strips away the noise, presenting the market exactly as it is: raw, fast, and uncompromising. Built on advanced Web3 data streams, our terminal provides unparalleled visibility into global asset movements.
           </p>
         </div>
       </div>
@@ -30,7 +30,7 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
         <div className="glass-panel p-6 rounded-xl hover:border-primary/40 transition-colors group">
           <Terminal className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-          <h3 className="font-mono text-lg font-bold text-white mb-2">RAW_DATA_ACCESS</h3>
+          <h3 className="font-mono text-lg font-bold text-white mb-2">Raw data access</h3>
           <p className="text-sm text-muted-foreground font-sans">
             Direct pipeline to global market liquidity, price action, and volume metrics without artificial delays or smoothing.
           </p>
@@ -38,7 +38,7 @@ export default function About() {
         
         <div className="glass-panel p-6 rounded-xl hover:border-primary/40 transition-colors group">
           <Zap className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-          <h3 className="font-mono text-lg font-bold text-white mb-2">LOW_LATENCY</h3>
+          <h3 className="font-mono text-lg font-bold text-white mb-2">Low latency</h3>
           <p className="text-sm text-muted-foreground font-sans">
             Optimized rendering engine built to process thousands of data points simultaneously while maintaining 60fps performance.
           </p>
@@ -46,7 +46,7 @@ export default function About() {
 
         <div className="glass-panel p-6 rounded-xl hover:border-primary/40 transition-colors group">
           <Database className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-          <h3 className="font-mono text-lg font-bold text-white mb-2">DEEP_INTELLIGENCE</h3>
+          <h3 className="font-mono text-lg font-bold text-white mb-2">Deep intelligence</h3>
           <p className="text-sm text-muted-foreground font-sans">
             Comprehensive historical data, circulating supply metrics, and macroeconomic dominance indicators.
           </p>
@@ -54,7 +54,7 @@ export default function About() {
 
         <div className="glass-panel p-6 rounded-xl hover:border-primary/40 transition-colors group">
           <Shield className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-          <h3 className="font-mono text-lg font-bold text-white mb-2">FUTURE_READY</h3>
+          <h3 className="font-mono text-lg font-bold text-white mb-2">Future ready</h3>
           <p className="text-sm text-muted-foreground font-sans">
             Upcoming modules include algorithmic trading webhooks, AI-driven sentiment analysis, and multi-chain portfolio tracking.
           </p>
@@ -64,7 +64,7 @@ export default function About() {
       <div className="text-center">
         <div className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground bg-black/40 px-4 py-2 rounded-full border border-white/5">
           <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-          SYSTEMS_ONLINE_AND_SECURE
+          Systems online and secure
         </div>
       </div>
 

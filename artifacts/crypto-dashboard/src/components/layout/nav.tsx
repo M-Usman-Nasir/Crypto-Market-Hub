@@ -6,9 +6,9 @@ export function TopNav() {
   const [location] = useLocation();
 
   const navItems = [
-    { href: "/", label: "HOME", icon: Home, exact: true },
-    { href: "/dashboard", label: "TERMINAL", icon: LayoutDashboard, exact: false },
-    { href: "/about", label: "INTEL", icon: Info, exact: true },
+    { id: "home", href: "/", label: "Home", icon: Home, exact: true },
+    { id: "terminal", href: "/dashboard", label: "Terminal", icon: LayoutDashboard, exact: false },
+    { id: "intel", href: "/about", label: "Intel", icon: Info, exact: true },
   ];
 
   return (
@@ -36,7 +36,7 @@ export function TopNav() {
             return (
               <Link key={item.href} href={item.href}>
                 <div
-                  data-testid={`nav-${item.label.toLowerCase()}`}
+                  data-testid={`nav-${item.id}`}
                   className={cn(
                     "relative px-4 py-2 text-sm font-mono tracking-widest cursor-pointer transition-all duration-300 rounded-md group flex items-center gap-2",
                     isActive

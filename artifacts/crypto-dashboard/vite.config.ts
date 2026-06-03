@@ -26,6 +26,9 @@ if (!basePath) {
   );
 }
 
+const apiProxyTarget =
+  process.env.API_PROXY_TARGET ?? "http://127.0.0.1:5000";
+
 export default defineConfig({
   base: basePath,
   plugins: [
@@ -65,6 +68,12 @@ export default defineConfig({
     allowedHosts: true,
     fs: {
       strict: true,
+    },
+    proxy: {
+      "/api": {
+        target: apiProxyTarget,
+        changeOrigin: true,
+      },
     },
   },
   preview: {

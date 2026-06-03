@@ -11,7 +11,7 @@ export function SparklineChart({ data, color = "#00F0FF", width = "100%", height
   if (!data || data.length === 0) {
     return (
       <div className="flex items-center justify-center text-xs text-muted-foreground font-mono" style={{ width, height }}>
-        NO_DATA
+        No data
       </div>
     );
   }

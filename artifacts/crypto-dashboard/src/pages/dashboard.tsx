@@ -17,7 +17,7 @@ export default function Dashboard() {
       <div className="flex items-center gap-3 border-b border-primary/20 pb-4 mb-6">
         <Activity className="text-primary w-6 h-6 animate-pulse" />
         <h1 className="font-serif text-3xl font-bold tracking-widest text-primary shadow-primary drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]">
-          MARKET_TERMINAL
+          Market Terminal
         </h1>
       </div>
 
@@ -26,7 +26,7 @@ export default function Dashboard() {
         <div className="lg:col-span-8 xl:col-span-9 space-y-6">
           <div className="glass-panel rounded-lg overflow-hidden">
             <div className="bg-white/5 px-6 py-4 border-b border-white/5 flex items-center justify-between">
-              <h2 className="font-mono text-sm font-semibold tracking-widest text-white/80">GLOBAL_ASSETS</h2>
+              <h2 className="font-mono text-sm font-semibold tracking-widest text-white/80">Global assets</h2>
               <div className="flex gap-2">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                 <span className="font-mono text-xs text-primary">LIVE</span>
@@ -112,7 +112,7 @@ export default function Dashboard() {
             
             <h3 className="font-mono text-sm font-semibold tracking-widest text-primary mb-6 flex items-center gap-2">
               <Server className="w-4 h-4" />
-              SYSTEM_STATUS
+              System status
             </h3>
 
             {marketLoading ? (
@@ -124,7 +124,7 @@ export default function Dashboard() {
             ) : market ? (
               <div className="space-y-6">
                 <div>
-                  <div className="text-xs font-mono text-muted-foreground mb-1">TOTAL_MARKET_CAP</div>
+                  <div className="text-xs font-mono text-muted-foreground mb-1">Total market cap</div>
                   <div className="text-2xl font-sans font-bold text-white tracking-tight">
                     {formatCompactNumber(market.total_market_cap_usd)}
                   </div>
@@ -139,17 +139,17 @@ export default function Dashboard() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-black/20 rounded p-3 border border-white/5">
-                    <div className="text-[10px] font-mono text-muted-foreground mb-1">24H_VOLUME</div>
+                    <div className="text-[10px] font-mono text-muted-foreground mb-1">24h volume</div>
                     <div className="text-sm font-mono text-white">{formatCompactNumber(market.total_volume_usd)}</div>
                   </div>
                   <div className="bg-black/20 rounded p-3 border border-white/5">
-                    <div className="text-[10px] font-mono text-muted-foreground mb-1">ACTIVE_ASSETS</div>
+                    <div className="text-[10px] font-mono text-muted-foreground mb-1">Active assets</div>
                     <div className="text-sm font-mono text-white">{market.active_cryptocurrencies.toLocaleString()}</div>
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="text-xs font-mono text-muted-foreground">DOMINANCE_INDEX</div>
+                  <div className="text-xs font-mono text-muted-foreground">Dominance index</div>
                   <div className="space-y-2">
                     <div>
                       <div className="flex justify-between text-xs font-mono mb-1">
@@ -179,7 +179,7 @@ export default function Dashboard() {
           <div className="glass-panel rounded-lg p-6">
             <h3 className="font-mono text-sm font-semibold tracking-widest text-primary mb-6 flex items-center gap-2">
               <Flame className="w-4 h-4" />
-              HOT_TARGETS
+              Hot targets
             </h3>
 
             <div className="space-y-4">

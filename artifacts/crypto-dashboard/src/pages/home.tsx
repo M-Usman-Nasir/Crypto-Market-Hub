@@ -10,42 +10,48 @@ import {
 
 const FEATURE_CARDS = [
   {
+    id: "live-market-terminal",
     icon: Terminal,
-    title: "LIVE_MARKET_TERMINAL",
-    desc: "Real-time price feeds, sparklines, and market cap rankings for the top 50 assets — refreshed continuously.",
+    title: "Live Market Terminal",
+    desc: "Real-time price feeds, sparklines, and market cap rankings for the top 50 assets, refreshed continuously.",
   },
   {
+    id: "deep-asset-intelligence",
     icon: BarChart2,
-    title: "DEEP_ASSET_INTELLIGENCE",
+    title: "Deep Asset Intelligence",
     desc: "Per-coin drill-downs: 7-day price trajectory, ATH distance, supply metrics, and full token background.",
   },
   {
+    id: "global-dominance-index",
     icon: Globe,
-    title: "GLOBAL_DOMINANCE_INDEX",
-    desc: "BTC and ETH market dominance bars, total market cap shift, and 24h volume — at a glance.",
+    title: "Global Dominance Index",
+    desc: "BTC and ETH market dominance bars, total market cap shift, and 24h volume at a glance.",
   },
   {
+    id: "trending-hot-targets",
     icon: Radio,
-    title: "TRENDING_HOT_TARGETS",
+    title: "Trending Hot Targets",
     desc: "CoinGecko's live trending index surfaced in the sidebar so momentum shifts never go unnoticed.",
   },
   {
+    id: "api-expansion-ready",
     icon: Layers,
-    title: "API_EXPANSION_READY",
-    desc: "Built on a modular Express backend — new data sources, webhooks, or trading APIs plug straight in.",
+    title: "API Expansion Ready",
+    desc: "Built on a modular Express backend: new data sources, webhooks, or trading APIs plug straight in.",
   },
   {
+    id: "future-module-pipeline",
     icon: Shield,
-    title: "FUTURE_MODULE_PIPELINE",
-    desc: "AI sentiment scoring, multi-chain portfolio tracking, and algorithmic alert webhooks coming next.",
+    title: "Future Module Pipeline",
+    desc: "AI sentiment scoring, multichain portfolio tracking, and algorithmic alert webhooks coming next.",
   },
 ];
 
 const STATS = [
-  { label: "ASSETS_TRACKED", value: "50+" },
-  { label: "DATA_SOURCES", value: "Live" },
-  { label: "LATENCY", value: "<1s" },
-  { label: "UPTIME_TARGET", value: "99.9%" },
+  { id: "assets-tracked", label: "Assets Tracked", value: "50+" },
+  { id: "data-sources", label: "Data Sources", value: "Live" },
+  { id: "latency", label: "Latency", value: "<1s" },
+  { id: "uptime-target", label: "Uptime Target", value: "99.9%" },
 ];
 
 export default function Home() {
@@ -77,18 +83,18 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary font-mono text-xs tracking-widest animate-in fade-in duration-500">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            LIVE_MARKET_DATA_ONLINE
+            Live market data online
           </div>
 
           {/* Headline */}
           <h1 className="font-serif text-5xl md:text-7xl font-bold tracking-tight leading-none animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <span className="text-white">THE NEXT-GEN</span>
+            <span className="text-white">The Next Gen</span>
             <br />
             <span
               className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary))]"
               style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.5)" }}
             >
-              CRYPTO TERMINAL
+              Crypto Terminal
             </span>
           </h1>
 
@@ -106,7 +112,7 @@ export default function Home() {
                 className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-md bg-primary text-background font-mono font-bold tracking-widest text-sm transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.5)] hover:scale-105 active:scale-100"
               >
                 <Activity className="w-4 h-4" />
-                LAUNCH_TERMINAL
+                Launch Terminal
                 <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </Link>
@@ -116,7 +122,7 @@ export default function Home() {
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-md border border-white/10 text-white font-mono font-bold tracking-widest text-sm transition-all hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
               >
                 <Zap className="w-4 h-4" />
-                LEARN_MORE
+                Learn More
               </button>
             </Link>
           </div>
@@ -129,11 +135,11 @@ export default function Home() {
               <div className="flex items-center justify-between px-6 py-3 border-b border-white/5 bg-primary/5">
                 <span className="font-mono text-xs tracking-widest text-primary flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  LIVE_PREVIEW — TOP_ASSETS
+                  Live preview: top assets
                 </span>
                 <Link href="/dashboard">
                   <span className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-1">
-                    VIEW_ALL <ChevronRight className="w-3 h-3" />
+                    View all <ChevronRight className="w-3 h-3" />
                   </span>
                 </Link>
               </div>
@@ -184,12 +190,12 @@ export default function Home() {
           <div className="container mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { label: "TOTAL_MARKET_CAP", value: formatCompactNumber(market.total_market_cap_usd), change: market.market_cap_change_percentage_24h },
-                { label: "24H_VOLUME", value: formatCompactNumber(market.total_volume_usd), change: null },
-                { label: "BTC_DOMINANCE", value: `${market.btc_dominance.toFixed(1)}%`, change: null },
-                { label: "ACTIVE_ASSETS", value: market.active_cryptocurrencies.toLocaleString(), change: null },
+                { id: "total-market-cap", label: "Total market cap", value: formatCompactNumber(market.total_market_cap_usd), change: market.market_cap_change_percentage_24h },
+                { id: "24h-volume", label: "24h volume", value: formatCompactNumber(market.total_volume_usd), change: null },
+                { id: "btc-dominance", label: "BTC dominance", value: `${market.btc_dominance.toFixed(1)}%`, change: null },
+                { id: "active-assets", label: "Active assets", value: market.active_cryptocurrencies.toLocaleString(), change: null },
               ].map((stat) => (
-                <div key={stat.label} className="text-center" data-testid={`stat-${stat.label.toLowerCase()}`}>
+                <div key={stat.id} className="text-center" data-testid={`stat-${stat.id}`}>
                   <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-1">{stat.label}</div>
                   <div className="font-mono text-lg font-bold text-white">{stat.value}</div>
                   {stat.change !== null && (
@@ -215,9 +221,9 @@ export default function Home() {
         </div>
         <div className="container mx-auto max-w-5xl relative z-10">
           <div className="text-center mb-16 space-y-4">
-            <div className="font-mono text-xs tracking-[0.3em] text-primary uppercase">PLATFORM_CAPABILITIES</div>
+            <div className="font-mono text-xs tracking-[0.3em] text-primary uppercase">Platform capabilities</div>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-white tracking-wide">
-              BUILT FOR PRECISION
+              Built for precision
             </h2>
             <p className="text-muted-foreground font-sans max-w-xl mx-auto">
               Every feature is engineered for signal over noise. No distractions. Pure market intelligence.
@@ -229,8 +235,8 @@ export default function Home() {
               const Icon = card.icon;
               return (
                 <div
-                  key={card.title}
-                  data-testid={`card-feature-${card.title}`}
+                  key={card.id}
+                  data-testid={`card-feature-${card.id}`}
                   className="glass-panel p-6 rounded-xl group hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.06)] relative overflow-hidden"
                 >
                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -256,7 +262,7 @@ export default function Home() {
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {STATS.map((s) => (
-              <div key={s.label} data-testid={`stat-platform-${s.label.toLowerCase()}`}>
+              <div key={s.id} data-testid={`stat-platform-${s.id}`}>
                 <div
                   className="text-4xl md:text-5xl font-bold font-mono text-primary mb-2"
                   style={{ textShadow: "0 0 20px hsl(var(--primary) / 0.4)" }}
@@ -276,7 +282,7 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary/8 blur-[150px] rounded-full" />
         </div>
         <div className="container mx-auto max-w-3xl text-center relative z-10 space-y-8">
-          <div className="font-mono text-xs tracking-[0.3em] text-primary">ACCESS_TERMINAL</div>
+          <div className="font-mono text-xs tracking-[0.3em] text-primary">Access terminal</div>
           <h2 className="font-serif text-3xl md:text-5xl font-bold text-white tracking-wide">
             SEE THE MARKET<br />
             <span className="text-primary">AS IT REALLY IS</span>
@@ -290,7 +296,7 @@ export default function Home() {
               className="group inline-flex items-center gap-3 px-10 py-5 rounded-md bg-primary text-background font-mono font-bold tracking-widest text-sm transition-all hover:shadow-[0_0_40px_hsl(var(--primary)/0.6)] hover:scale-105 active:scale-100"
             >
               <TrendingUp className="w-5 h-5" />
-              OPEN_THE_TERMINAL
+              Open the terminal
               <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </button>
           </Link>
