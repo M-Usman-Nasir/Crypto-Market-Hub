@@ -1,11 +1,8 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    "allowJs": true
   },
-  "include": ["index.ts"],
-  "references": [
-    { "path": "../artifacts/api-server" },
-    { "path": "../lib/api-zod" }
-  ]
+  "include": ["index.ts"]
 }
