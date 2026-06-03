@@ -3,7 +3,7 @@
   "installCommand": "cd ../.. && pnpm install",
   "buildCommand": "node ./build.mjs",
   "functions": {
-    "api/index.ts": {
+    "api/index.js": {
       "maxDuration": 30,
       "includeFiles": "dist/**"
     }
