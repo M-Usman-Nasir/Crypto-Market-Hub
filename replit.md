@@ -7,7 +7,7 @@ _Replace the heading above with the project's name, and this line with one sente
 **Option A — one project (repo root `.`):** `vercel.json` serves UI + `/api` via `api/index.ts`.
 
 **Option B — two projects (current setup):**
-- API: Root Directory `artifacts/api-server`, uses `artifacts/api-server/vercel.json`.
+- API: Root Directory `artifacts/api-server`, build `node ./build.mjs` (do not use root `pnpm build` — it builds the whole monorepo).
 - UI: Root Directory `.` (repo root). Set env **`VITE_API_BASE_URL`** = `https://your-api-project.vercel.app` (no trailing slash).
 
 Optional API env: `LOG_LEVEL=info`, `NODE_ENV=production`.
