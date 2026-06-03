@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, type IRouter } from "express";
 import {
   ListCoinsQueryParams,
   GetCoinParams,
@@ -9,7 +9,7 @@ import type {
   CoinGeckoTrendingResponse,
 } from "../types/coingecko";
 
-const router = Router();
+const router: IRouter = Router();
 
 const COINGECKO_BASE = "https://api.coingecko.com/api/v3";
 
