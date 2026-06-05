@@ -18,14 +18,21 @@ Open `http://localhost:8080` — UI and API on one port.
 
 Free allowance on shared VMs; one Docker deploy. Card may be required for account verification.
 
-1. Install CLI: https://fly.io/docs/hands-on/install-flyctl/
-2. `fly auth login`
+1. Install CLI (Windows PowerShell):
+
+   ```powershell
+   iwr https://fly.io/install.ps1 -useb | iex
+   ```
+
+   Then **close and reopen** the terminal (or add `C:\Users\<you>\.fly\bin` to your user PATH). The command is `flyctl` (Windows also provides `fly` in that folder).
+
+2. `flyctl auth login`
 3. Edit `fly.toml` → set `app = "your-unique-name"`
 4. From repo root:
 
 ```bash
-fly launch --no-deploy
-fly deploy
+flyctl launch --no-deploy
+flyctl deploy
 ```
 
 5. Open the URL Fly prints (e.g. `https://your-app.fly.dev`).

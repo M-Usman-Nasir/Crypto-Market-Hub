@@ -1,4 +1,4 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter, type Request, type Response } from "express";
 import {
   ListCoinsQueryParams,
   GetCoinParams,
@@ -8,36 +8,37 @@ import type {
   CoinGeckoGlobalResponse,
   CoinGeckoTrendingResponse,
 } from "../types/coingecko";
+import {
+  CoinGeckoError,
+  cgFetch,
+  getCache,
+  setCache,
+} from "../lib/coingecko";
 
 const router: IRouter = Router();
 
-const COINGECKO_BASE = "https://api.coingecko.com/api/v3";
-
-// Simple in-memory cache to respect CoinGecko free tier rate limits
-const cache = new Map<string, { data: unknown; expiresAt: number }>();
-
-function getCache<T>(key: string): T | null {
-  const entry = cache.get(key);
-  if (!entry) return null;
-  if (Date.now() > entry.expiresAt) {
-    cache.delete(key);
-    return null;
+function sendCachedOrError(
+  req: Request,
+  res: Response,
+  cacheKey: string,
+  err: unknown,
+  message: string,
+): void {
+  const stale = getCache<unknown>(cacheKey, true);
+  if (stale !== null) {
+    res.setHeader("X-Cache", "stale");
+    res.json(stale);
+    return;
   }
-  return entry.data as T;
-}
 
-function setCache(key: string, data: unknown, ttlMs: number) {
-  cache.set(key, { data, expiresAt: Date.now() + ttlMs });
-}
+  const upstreamStatus = err instanceof CoinGeckoError ? err.status : undefined;
+  req.log.error({ err, cacheKey, upstreamStatus }, message);
 
-async function cgFetch<T>(url: string): Promise<T> {
-  const res = await fetch(url, {
-    headers: { Accept: "application/json" },
+  const status = upstreamStatus === 429 ? 503 : 502;
+  res.status(status).json({
+    error: message,
+    ...(upstreamStatus !== undefined ? { upstreamStatus } : {}),
   });
-  if (!res.ok) {
-    throw new Error(`CoinGecko error: ${res.status}`);
-  }
-  return res.json() as Promise<T>;
 }
 
 // GET /api/coins — cache 60 seconds
@@ -55,13 +56,12 @@ router.get("/coins", async (req, res) => {
 
   try {
     const data = await cgFetch(
-      `${COINGECKO_BASE}/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=true&price_change_percentage=7d`
+      `/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=true&price_change_percentage=7d`,
     );
     setCache(cacheKey, data, 60_000);
     res.json(data);
   } catch (err) {
-    req.log.error({ err }, "Failed to fetch coins");
-    res.status(502).json({ error: "Failed to fetch market data" });
+    sendCachedOrError(req, res, cacheKey, err, "Failed to fetch market data");
   }
 });
 
@@ -82,7 +82,7 @@ router.get("/coins/:id", async (req, res) => {
 
   try {
     const data = await cgFetch<CoinGeckoCoinDetail>(
-      `${COINGECKO_BASE}/coins/${parsed.data.id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`
+      `/coins/${parsed.data.id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`,
     );
 
     const marketData = data.market_data ?? {};
@@ -110,8 +110,7 @@ router.get("/coins/:id", async (req, res) => {
     setCache(cacheKey, coin, 60_000);
     res.json(coin);
   } catch (err) {
-    req.log.error({ err }, "Failed to fetch coin");
-    res.status(502).json({ error: "Failed to fetch coin data" });
+    sendCachedOrError(req, res, cacheKey, err, "Failed to fetch coin data");
   }
 });
 
@@ -125,7 +124,7 @@ router.get("/market-overview", async (req, res) => {
   }
 
   try {
-    const data = await cgFetch<CoinGeckoGlobalResponse>(`${COINGECKO_BASE}/global`);
+    const data = await cgFetch<CoinGeckoGlobalResponse>("/global");
     const d = data.data ?? {};
 
     const overview = {
@@ -141,8 +140,7 @@ router.get("/market-overview", async (req, res) => {
     setCache(cacheKey, overview, 90_000);
     res.json(overview);
   } catch (err) {
-    req.log.error({ err }, "Failed to fetch market overview");
-    res.status(502).json({ error: "Failed to fetch market overview" });
+    sendCachedOrError(req, res, cacheKey, err, "Failed to fetch market overview");
   }
 });
 
@@ -156,9 +154,7 @@ router.get("/trending", async (req, res) => {
   }
 
   try {
-    const data = await cgFetch<CoinGeckoTrendingResponse>(
-      `${COINGECKO_BASE}/search/trending`,
-    );
+    const data = await cgFetch<CoinGeckoTrendingResponse>("/search/trending");
     const coins = (data.coins ?? []).slice(0, 10).map((item) => ({
       id: item.item.id,
       name: item.item.name,
@@ -172,8 +168,7 @@ router.get("/trending", async (req, res) => {
     setCache(cacheKey, coins, 300_000);
     res.json(coins);
   } catch (err) {
-    req.log.error({ err }, "Failed to fetch trending");
-    res.status(502).json({ error: "Failed to fetch trending coins" });
+    sendCachedOrError(req, res, cacheKey, err, "Failed to fetch trending coins");
   }
 });
 
